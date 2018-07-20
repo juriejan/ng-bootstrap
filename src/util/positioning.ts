@@ -108,7 +108,7 @@ export class Positioning {
         hostElPosition = this.offset(hostElement, false);
       } else {
         let containerElement = window.document.querySelector(container);
-        this.relative(hostElement, containerElement);
+        hostElPosition = this.relative(hostElement, containerElement);
       }
     } else {
       hostElPosition = this.position(hostElement, false);
