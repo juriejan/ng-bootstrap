@@ -83,7 +83,7 @@ export class NgbTooltipWindow {
 /**
  * A lightweight, extensible directive for fancy tooltip creation.
  */
-@Directive({selector: '[ngbTooltip]', exportAs: 'ngbTooltip'})
+@Directive({selector: '[ngbtooltip]', exportAs: 'ngbTooltip'})
 export class NgbTooltip implements OnInit, OnDestroy {
   /**
     * Placement of a popover accepts:
@@ -148,14 +148,14 @@ export class NgbTooltip implements OnInit, OnDestroy {
    * Content to be displayed as tooltip. If falsy, the tooltip won't open.
    */
   @Input()
-  set ngbTooltip(value: string | TemplateRef<any>) {
+  set ngbtooltip(value: string | TemplateRef<any>) {
     this._ngbTooltip = value;
     if (!value && this._windowRef) {
       this.close();
     }
   }
 
-  get ngbTooltip() { return this._ngbTooltip; }
+  get ngbtooltip() { return this._ngbTooltip; }
 
   /**
    * Opens an element’s tooltip. This is considered a “manual” triggering of the tooltip.
