@@ -192,7 +192,7 @@ export class NgbInputDatepicker implements OnChanges,
     this._zoneSubscription = ngZone.onStable.subscribe(() => {
       if (this._cRef) {
         positionElements(
-            this._elRef.nativeElement, this._cRef.location.nativeElement, this.placement, this.container === 'body');
+            this._elRef.nativeElement, this._cRef.location.nativeElement, this.placement, this.container);
       }
     });
   }
@@ -266,9 +266,7 @@ export class NgbInputDatepicker implements OnChanges,
 
       this._cRef.instance.setDisabledState(this.disabled);
 
-      if (this.container === 'body') {
-        window.document.querySelector(this.container).appendChild(this._cRef.location.nativeElement);
-      }
+      window.document.querySelector(this.container).appendChild(this._cRef.location.nativeElement);
 
       // focus handling
       ngbFocusTrap(this._cRef.location.nativeElement, this._closed$);
