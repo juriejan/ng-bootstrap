@@ -176,7 +176,7 @@ export class NgbTypeahead implements ControlValueAccessor,
       if (this.isPopupOpen()) {
         positionElements(
             this._elementRef.nativeElement, this._windowRef.location.nativeElement, this.placement,
-            this.container === 'body');
+            this.container);
       }
     });
   }
@@ -284,9 +284,7 @@ export class NgbTypeahead implements ControlValueAccessor,
       this._windowRef.instance.selectEvent.subscribe((result: any) => this._selectResultClosePopup(result));
       this._windowRef.instance.activeChangeEvent.subscribe((activeId: string) => this.activeDescendant = activeId);
 
-      if (this.container === 'body') {
-        window.document.querySelector(this.container).appendChild(this._windowRef.location.nativeElement);
-      }
+      window.document.querySelector(this.container).appendChild(this._windowRef.location.nativeElement);
     }
   }
 

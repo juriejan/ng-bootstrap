@@ -81,13 +81,38 @@ export class Positioning {
     return elOffset;
   }
 
-  positionElements(hostElement: HTMLElement, targetElement: HTMLElement, placement: string, appendToBody?: boolean):
+  relative(hostElement: HTMLElement, containerElement: HTMLElement): ClientRect {
+    let hostOffset = this.offset(hostElement);
+    let containerOffset = this.offset(containerElement);
+    return {
+      height: hostElement.offsetHeight,
+      width: hostElement.offsetWidth,
+      top: hostOffset.top - containerOffset.top,
+      bottom: (hostOffset.top - containerOffset.top) + hostElement.offsetHeight,
+      left: hostOffset.left - containerOffset.left,
+      right: (hostOffset.left - containerOffset.left) + hostElement.offsetWidth
+    };
+  }
+
+  positionElements(hostElement: HTMLElement, targetElement: HTMLElement, placement: string, container?: string):
       ClientRect {
     const hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
     const targetElStyles = this.getAllStyles(targetElement);
     const targetElBCR = targetElement.getBoundingClientRect();
     const placementPrimary = placement.split('-')[0] || 'top';
     const placementSecondary = placement.split('-')[1] || 'center';
+    let hostElPosition;
+
+    if (container) {
+      if (container === 'body') {
+        hostElPosition = this.offset(hostElement, false);
+      } else {
+        let containerElement = window.document.querySelector(container);
+        hostElPosition = this.relative(hostElement, containerElement);
+      }
+    } else {
+      hostElPosition = this.position(hostElement, false);
+    }
 
     let targetElPosition: ClientRect = {
       'height': targetElBCR.height || targetElement.offsetHeight,
